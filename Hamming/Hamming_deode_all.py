@@ -36,8 +36,8 @@ def decode(string):
     matrix_list = [list(map(int, group)) for group in grouped_characters]
 
     last_elem = grouped_characters[len(grouped_characters)-1]  # Corrected line
-    last_elem += '0' * (dimension - len(last_elem))  # Add the last 0s
-    matrix_list[-1] = list(map(int, last_elem))  # Update the last element in matrix_list
+    if(len(last_elem)!= dimension): #no decoding possible
+        return ""
 
     binrary_matrix = np.array(matrix_list)
     
@@ -46,6 +46,8 @@ def decode(string):
     
     # Convert to ASCII
     binrary_before_perm_string = ''.join(map(str, binrary_before_perm_matrix.flatten().astype(int)))
+    if (len(binrary_before_perm_string)%8 != 0): #no decoding possible
+        return ""
     ascii_string = ''.join([chr(int(binrary_before_perm_string[i:i+8], 2)) for i in range(0, len(binrary_before_perm_string), 8)])
 
     return ascii_string  
