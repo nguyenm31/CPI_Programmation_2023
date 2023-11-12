@@ -43,6 +43,8 @@ def decode(string):
     
     # Get the binrary matrix before the permutation
     binrary_before_perm_matrix = np.matmul(binrary_matrix, inverse_transpose_perm_matrix)
+    flatten = binrary_before_perm_matrix.flatten().astype(int)
+    filtered_array = flatten[flatten != 2]
     
     # Convert to ASCII
     binrary_before_perm_string = ''.join(map(str, binrary_before_perm_matrix.flatten().astype(int)))
